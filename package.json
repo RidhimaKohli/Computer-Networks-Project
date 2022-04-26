@@ -1,0 +1,26 @@
+{
+  "name": "videocallwebapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RidhimaKohli/VideoCallWebApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RidhimaKohli/VideoCallWebApp/issues"
+  },
+  "homepage": "https://github.com/RidhimaKohli/VideoCallWebApp#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "peer": "^0.6.1",
+    "socket.io": "^4.1.2",
+    "uuid": "^8.3.2"
+  }
+}

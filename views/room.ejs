@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="js-focu-visible" data-js-focu-visible>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024">
+    <title>Video-Call-Room</title>
+
+    <!--Links to  bootstrap , css stylesheet , fontawesome , peerjs and socket.io -->
+    <link rel="stylesheet" href="yourpath/magic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://unpkg.com/webkul-micron@1.1.6/dist/css/micron.min.css" type="text/css" rel="stylesheet">
+    <script src="https://unpkg.com/webkul-micron@1.1.6/dist/script/micron.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const ROOM_ID = "<%= roomId %>";
+    </script>
+
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="color_buttons"></div>
+            <p>
+                <B>Select Color For Bottom Controls Bar</B>
+            </p>
+            <button id="roomButton4" type="button" onclick='pinkbuttonevent()' class="theme_button">Pink</button>
+            <button id="roomButton3" type="button" onclick='purplebuttonevent()' class="theme_button">Purple</button>
+            <button id="roomButton2" type="button" onclick='bluebuttonevent()' class="theme_button">Blue</button>
+            <button id="roomButton1" type="button" onclick='greenbuttonevent()' class="theme_button">Green</button>
+            <button id="roomButton5" type="button" onclick='defaultbuttonevent()' class="theme_button">Default</button>
+        </div>
+    </div>
+
+    </div>
+    <div class="vc_content">
+        <div class="video_and_controls_block" id="wrap">
+            <div class="video_block">
+                <div id='video-screens'>
+                </div>
+            </div>
+
+            <div class="controls_section">
+                <div class="controls_block">
+                    <div onclick="muteUnmute()" class="controls_button main__mute_button" data-micron="jelly">
+                        <i class="fas fa-microphone animate__animated animate__bounce"></i>
+                        <span>Mic</span>
+                    </div>
+
+                    <div onclick="playStop()" class="controls_button main__video_button" data-micron="jelly">
+                        <i class="fas fa-video animate__animated animate__bounce"></i>
+                        <span>Video</span>
+                    </div>
+                    <div class="controls_button main__video_button" data-micron="jelly" id="myBtn">
+                        <i class="fas fa-palette animate__animated animate__bounce"></i>
+                        <span>Color</span>
+                    </div>
+                </div>
+
+                <div class="controls_block">
+                    <a href="https://video-call-home.herokuapp.com/">
+                        <div class="controls_button" data-micron="jelly">
+                            <i class="fas fa-home animate__animated animate__bounce"></i>
+                            <span>Home</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="controls_block">
+                    <div class="controls_button" data-micron="jelly">
+                        <div class="dropdown">
+
+                            <button class="dropbtn"><i
+                                    class="fas fa-ellipsis-h animate__animated animate__bounce"></i></button>
+                            <div class="dropdown-content">
+                                <a href="https://office.live.com/start/Calendar.aspx?ui=en%2DUS&rs=US" target="_blank" rel="noopener noreferrer">Calendar</a>
+                                <a href="https://www.google.com/gmail/" target="_blank" rel="noopener noreferrer">E-Mail</a>
+                                <a href="https://video-call-home.herokuapp.com/fun" target="_blank" rel="noopener noreferrer">Fun</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="main__right">
+            <div class="main__header">
+                <h6>Chat</h6>
+                <input id="username" type="text" placeholder="Enter your name">
+            </div>
+            <div class="main__chat_window">
+                <ul class="messages">
+
+                </ul>
+
+            </div>
+            <div class="main__message_container">
+                <input id="chat_message" type="text" placeholder="Type message here...">
+                <!---input username --->
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

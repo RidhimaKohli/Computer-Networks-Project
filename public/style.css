@@ -1,0 +1,320 @@
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+#video-screens {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+
+video {
+    z-index: 10;
+    height: 240px;
+    width: 320px;
+    object-fit: cover;
+    margin: 25px;
+    border-radius: 5px;
+}
+
+.vc_content {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+#roomButton1 {
+    background-color: #006137;
+    color: white;
+}
+
+#roomButton2 {
+    background-color: #014893;
+    color: white;
+}
+
+#roomButton3 {
+    background-color: #871C74;
+    color: white;
+}
+
+#roomButton4 {
+    background-color: #9E0047;
+    color: white;
+}
+
+#roomButton5 {
+    background-color: black;
+    color: white;
+}
+
+.theme_button {
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    font-size: 20px;
+}
+
+.color_buttons {
+    align-items: center;
+    justify-content: center;
+}
+
+.video_and_controls_block {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__right {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__header {
+    padding-top: 5px;
+    color: #F5F5F5;
+    text-align: center;
+}
+
+.main__chat_window {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #353333;
+}
+
+.messages {
+    color: white;
+    list-style: none;
+}
+
+.main__message_container {
+    padding: 22px 12px;
+    display: flex;
+}
+
+.main__message_container input {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    color: #F5F5F5;
+}
+
+.video_block {
+    flex-grow: 1;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls_section {
+    z-index: 9;
+    display: flex;
+    background-color: transparent;
+    color: #DDDADA;
+    padding: 5px;
+    justify-content: center;
+}
+
+.controls_block {
+    align-items: center;
+    justify-self: center;
+    display: flex;
+}
+
+.controls_block a {
+    text-decoration: none;
+    color: white;
+}
+
+.controls_button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    min-width: 80px;
+    cursor: pointer;
+}
+
+.controls_button:hover {
+    background-color: rgb(37, 37, 37);
+    border-radius: 5%;
+}
+
+.controls_button i {
+    font-size: 24px;
+}
+
+#chat_heading {
+    font-size: 20px;
+}
+
+.unmute {
+    color: rgb(255, 20, 20);
+}
+
+.stop {
+    color: rgb(255, 20, 20);
+}
+
+#wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#wrap p {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: rgba(255, 255, 255, .5);
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+.ball {
+    pointer-events: none;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: gray;
+    animation: implode 1s ease-in-out;
+    animation-fill-mode: both;
+    opacity: .5;
+}
+
+@keyframes implode {
+    100% {
+        transform: scale(0)
+    }
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 11;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 50%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: transparent;
+    /* Fallback color */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dropbtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    min-width: 80px;
+    cursor: pointer;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+    z-index: 11;
+    position: relative;
+    display: inline-block;
+    bottom: 100%;
+    border-radius: 5px;
+}
+
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 11;
+    bottom: 100%;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #bbbbbb;
+    font-weight: bolder;
+}
+
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-content {
+    z-index: 11;
+    display: block;
+    bottom: 100%;
+}
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(37, 37, 37);
+    border-radius: 5%;
+}

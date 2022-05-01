@@ -41,5 +41,15 @@ Heroku and Vercel
 - possible that some deployment platform settings were not updated for local
 - file addressing issues
 
+# References
 
+- https://www.w3schools.com/js/js_events.asp
+- https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events
+- https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play_event
+- https://socket.io/
+- https://dribbble.com/tags/video_call
+- https://github.com/public-apis/public-apis
+- https://github.com/30-seconds/30-seconds-of-css
+- https://medium.com/bluecadet/just-enough-multiplayer-a-simple-start-for-prototyping-realtime-multi-user-spaces-with-socket-io-1fd260ef3e54
+- https://codepen.io/michaelsboost/pen/cnCAL
 

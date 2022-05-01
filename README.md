@@ -39,6 +39,7 @@ Heroku and Vercel
 - check firewall settings
 - possibility that node is not installed
 - possible that some deployment platform settings were not updated for local
+- file addressing issues
 
 
 

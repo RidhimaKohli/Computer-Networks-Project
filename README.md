@@ -18,12 +18,12 @@ Game page
 
 To run  video call part , type the following in command line
 - npm install
-- node start app.js
+- node app.js
 - Go to the port mentioned
 
 To run game part
 - npm install
-- node start App.js
+- node App.js
 - Go to the port mentioned
 
 To run home page part

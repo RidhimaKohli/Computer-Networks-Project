@@ -5,7 +5,7 @@ The project is a video call application with pictionary like game
 
 # Link
 
-https://funtime-home.vercel.app/ (find the repository for the homepage here: https://github.com/slowdivesun/CN_Homepage/)
+https://funtime-home.vercel.app/ (find the repository for the homepage [here](https://github.com/slowdivesun/CN_Homepage/))
 
 # Code components
 

@@ -33,3 +33,5 @@
     String.prototype['autoLink'] = autoLink;
 
 }).call(this);
+
+//template

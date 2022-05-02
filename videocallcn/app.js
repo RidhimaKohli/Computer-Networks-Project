@@ -1,5 +1,5 @@
 let express = require('express');
-let stream = require('./ws/stream');
+let stream = require('./stream');
 let app = express();
 let server = require('http').Server(app);
 let io = require('socket.io')(server);
@@ -21,7 +21,7 @@ io.of('/stream').on('connection', stream);
 
 const port = process.env.PORT || 3030;
 server.listen(port, () => {
-    console.log("PORT : " + port);
+    console.log("ALL OK !! GO TO PORT : " + port);
 });
 
 // app.use(cors());

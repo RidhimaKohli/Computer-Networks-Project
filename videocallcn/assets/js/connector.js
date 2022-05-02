@@ -41,23 +41,23 @@ window.addEventListener('load', () => {
 
 
             socket.on('new user', (data) => {
-                socket.emit('newUserStart', { to: data.socketId, sender: socketId });
+                socket.emit('clientAdded', { to: data.socketId, sender: socketId });
                 pc.push(data.socketId);
                 init(true, data.socketId);
             });
 
 
-            socket.on('newUserStart', (data) => {
+            socket.on('clientAdded', (data) => {
                 pc.push(data.sender);
                 init(false, data.sender);
             });
-
+            //ok
 
             socket.on('ice candidates', async(data) => {
                 data.candidate ? await pc[data.sender].addIceCandidate(new RTCIceCandidate(data.candidate)) : '';
             });
 
-
+            //ok
             socket.on('sdp', async(data) => {
                 if (data.description.type === 'offer') {
                     data.description ? await pc[data.sender].setRemoteDescription(new RTCSessionDescription(data.description)) : '';
@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
                             h.setLocalStream(stream);
                         }
 
-                        //save my stream
+                        //save 
                         myStream = stream;
 
                         stream.getTracks().forEach((track) => {
@@ -100,7 +100,7 @@ window.addEventListener('load', () => {
 
         function getAndSetUserStream() {
             h.getUserFullMedia().then((stream) => {
-                //save my stream
+                //save
                 myStream = stream;
 
                 h.setLocalStream(stream);
@@ -123,16 +123,16 @@ window.addEventListener('load', () => {
 
 
 
-        function init(createOffer, partnerName) {
-            pc[partnerName] = new RTCPeerConnection(h.getIceServer());
+        function init(createOffer, otherClient) {
+            pc[otherClient] = new RTCPeerConnection(h.getIceServer());
 
             if (screen && screen.getTracks().length) {
                 screen.getTracks().forEach((track) => {
-                    pc[partnerName].addTrack(track, screen);
+                    pc[otherClient].addTrack(track, screen);
                 });
             } else if (myStream) {
                 myStream.getTracks().forEach((track) => {
-                    pc[partnerName].addTrack(track, myStream);
+                    pc[otherClient].addTrack(track, myStream);
                 });
             } else {
                 h.getUserFullMedia().then((stream) => {
@@ -140,7 +140,7 @@ window.addEventListener('load', () => {
                     myStream = stream;
 
                     stream.getTracks().forEach((track) => {
-                        pc[partnerName].addTrack(track, stream);
+                        pc[otherClient].addTrack(track, stream);
                     });
 
                     h.setLocalStream(stream);
@@ -153,51 +153,49 @@ window.addEventListener('load', () => {
 
             //create offer
             if (createOffer) {
-                pc[partnerName].onnegotiationneeded = async() => {
-                    let offer = await pc[partnerName].createOffer();
+                pc[otherClient].onnegotiationneeded = async() => {
+                    let offer = await pc[otherClient].createOffer();
 
-                    await pc[partnerName].setLocalDescription(offer);
+                    await pc[otherClient].setLocalDescription(offer);
 
-                    socket.emit('sdp', { description: pc[partnerName].localDescription, to: partnerName, sender: socketId });
+                    socket.emit('sdp', { description: pc[otherClient].localDescription, to: otherClient, sender: socketId });
                 };
             }
 
 
 
-            //send ice candidate to partnerNames
-            pc[partnerName].onicecandidate = ({ candidate }) => {
-                socket.emit('ice candidates', { candidate: candidate, to: partnerName, sender: socketId });
+
+            pc[otherClient].onicecandidate = ({ candidate }) => {
+                socket.emit('ice candidates', { candidate: candidate, to: otherClient, sender: socketId });
             };
 
 
 
-            //add other's video 
-            pc[partnerName].ontrack = (e) => {
+
+            pc[otherClient].ontrack = (e) => {
                 let str = e.streams[0];
-                if (document.getElementById(`${ partnerName }-video`)) {
-                    document.getElementById(`${ partnerName }-video`).srcObject = str;
+                if (document.getElementById(`${ otherClient }-video`)) {
+                    document.getElementById(`${ otherClient }-video`).srcObject = str;
                 } else {
-                    //video elem
+
                     let newVid = document.createElement('video');
-                    newVid.id = `${ partnerName }-video`;
+                    newVid.id = `${ otherClient }-video`;
                     newVid.srcObject = str;
                     newVid.autoplay = true;
                     newVid.className = 'remote-video';
 
-                    //video controls elements
+                    // template
                     let controlDiv = document.createElement('div');
                     controlDiv.className = 'remote-video-controls';
                     controlDiv.innerHTML = `<i class="fa fa-microphone text-white pr-3 mute-remote-mic" title="Mute"></i>
                         <i class="fa fa-expand text-white expand-remote-video" title="Expand"></i>`;
 
-                    //create a new div for card
+                    //template
                     let cardDiv = document.createElement('div');
                     cardDiv.className = 'card card-sm';
-                    cardDiv.id = partnerName;
+                    cardDiv.id = otherClient;
                     cardDiv.appendChild(newVid);
                     cardDiv.appendChild(controlDiv);
-
-                    //put div in main-section elem
                     document.getElementById('videos').appendChild(cardDiv);
 
                     h.adjustVideoElemSize();
@@ -206,26 +204,26 @@ window.addEventListener('load', () => {
 
 
 
-            pc[partnerName].onconnectionstatechange = (d) => {
-                switch (pc[partnerName].iceConnectionState) {
+            pc[otherClient].onconnectionstatechange = (d) => {
+                switch (pc[otherClient].iceConnectionState) {
                     case 'disconnected':
                     case 'failed':
-                        h.closeVideo(partnerName);
+                        h.closeVideo(otherClient);
                         break;
 
                     case 'closed':
-                        h.closeVideo(partnerName);
+                        h.closeVideo(otherClient);
                         break;
                 }
             };
 
 
 
-            pc[partnerName].onsignalingstatechange = (d) => {
-                switch (pc[partnerName].signalingState) {
+            pc[otherClient].onsignalingstatechange = (d) => {
+                switch (pc[otherClient].signalingState) {
                     case 'closed':
                         console.log("Signalling state is 'closed'");
-                        h.closeVideo(partnerName);
+                        h.closeVideo(otherClient);
                         break;
                 }
             };

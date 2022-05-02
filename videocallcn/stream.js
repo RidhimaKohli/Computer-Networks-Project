@@ -9,8 +9,8 @@ const stream = (socket) => {
     });
 
 
-    socket.on('newUserStart', (data) => {
-        socket.to(data.to).emit('newUserStart', { sender: data.sender });
+    socket.on('clientAdded', (data) => {
+        socket.to(data.to).emit('clientAdded', { sender: data.sender });
     });
 
 
@@ -18,9 +18,10 @@ const stream = (socket) => {
         socket.to(data.to).emit('sdp', { description: data.description, sender: data.sender });
     });
 
-
+    // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/icecandidate_event
     socket.on('ice candidates', (data) => {
         socket.to(data.to).emit('ice candidates', { candidate: data.candidate, sender: data.sender });
+        console.log('ice candidates');
     });
 
 
